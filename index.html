@@ -35,16 +35,26 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 2rem 5%;
+            padding: 1.5rem 5%;
             background-color: transparent;
             border-bottom: 1px solid var(--border-color);
         }
 
-        .logo {
-            font-size: 1.1rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
+        /* 專業圖片 Logo 按鈕排版設定 */
+        .logo-btn {
+            display: inline-block;
+            height: 45px; /* 這裡可以自由調整妳的 Logo 在網頁上的高度 */
+            transition: opacity 0.2s ease;
+        }
+
+        .logo-btn:hover {
+            opacity: 0.85; /* 滑鼠移過去時會微微變透明，提示這是可以點擊的按鈕 */
+        }
+
+        .logo-btn img {
+            height: 100%;
+            width: auto;
+            object-fit: contain; /* 確保 Logo 圖片絕對不會被壓扁或拉伸變形 */
         }
 
         .nav-right {
@@ -226,7 +236,11 @@
 
     <!-- 導覽列 -->
     <nav>
-        <div class="logo">Crochet For Her HK</div>
+        <!-- 點擊會跳回頂端的圖片 Logo 按鈕 -->
+        <a href="#" class="logo-btn" title="返回首頁 / Back to Home">
+            <img src="logo.png" alt="Crochet For Her HK Logo">
+        </a>
+        
         <div class="nav-right">
             <ul class="nav-links">
                 <li><a href="#vision"><span class="zh">願景</span><span class="en">Vision</span></a></li>
