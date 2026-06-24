@@ -47,6 +47,12 @@
             letter-spacing: 0.1em;
         }
 
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 2.5rem;
+        }
+
         .nav-links {
             display: flex;
             gap: 2rem;
@@ -62,6 +68,36 @@
 
         .nav-links a:hover {
             color: var(--text-main);
+        }
+
+        /* rhode 風格語言切換鈕 */
+        .lang-switch {
+            display: flex;
+            gap: 0.5rem;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .lang-btn {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            padding: 0.2rem 0.4rem;
+            transition: color 0.2s ease;
+            font-weight: 400;
+        }
+
+        .lang-btn.active {
+            color: var(--text-main);
+            font-weight: 600;
+            border-bottom: 1px solid var(--text-main);
+        }
+
+        /* 語言顯示控制邏輯 */
+        .lang-zh .en, .lang-en .zh {
+            display: none !important;
         }
 
         /* 英雄區塊：極致留白與大氣標題 */
@@ -84,11 +120,18 @@
         }
 
         header h1 {
-            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-size: clamp(2.2rem, 5vw, 4rem);
             font-weight: 400;
-            line-height: 1.1;
+            line-height: 1.2;
             margin-bottom: 2rem;
             max-width: 900px;
+        }
+
+        header p {
+            color: var(--text-muted); 
+            margin-bottom: 2.5rem; 
+            max-width: 650px; 
+            font-size: 1.05rem;
         }
 
         /* rhode 風格按鈕：膠囊形狀、沉穩色調 */
@@ -151,18 +194,6 @@
             font-size: 0.95rem;
         }
 
-        /* 雙語平行對照區塊 */
-        .bilingual-block {
-            margin-bottom: 2rem;
-        }
-
-        .en-text {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            margin-top: 0.5rem;
-            font-style: italic;
-        }
-
         /* 隱私與專業安全網 */
         .safety-bar {
             background-color: #eae8e3;
@@ -185,44 +216,58 @@
 
         @media (max-width: 768px) {
             nav { flex-direction: column; gap: 1rem; }
+            .nav-right { flex-direction: column; gap: 1rem; }
             header { min-height: 60vh; }
         }
     </style>
 </head>
-<body>
+<!-- 預設為中文介面 -->
+<body class="lang-zh">
 
     <!-- 導覽列 -->
     <nav>
         <div class="logo">Crochet For Her HK</div>
-        <ul class="nav-links">
-            <li><a href="#vision">願景 / Vision</a></li>
-            <li><a href="#project">計劃 / Project</a></li>
-            <li><a href="#safety">安全 / Safety</a></li>
-        </ul>
+        <div class="nav-right">
+            <ul class="nav-links">
+                <li><a href="#vision"><span class="zh">願景</span><span class="en">Vision</span></a></li>
+                <li><a href="#project"><span class="zh">計劃</span><span class="en">Project</span></a></li>
+                <li><a href="#safety"><span class="zh">安全邊界</span><span class="en">Safety</span></a></li>
+            </ul>
+            <!-- 切換按鈕 -->
+            <div class="lang-switch">
+                <button class="lang-btn active" onclick="setLanguage('zh')">繁中</button>
+                <button class="lang-btn" onclick="setLanguage('en')">EN</button>
+            </div>
+        </div>
     </nav>
 
     <!-- 英雄首頁區塊 -->
     <header>
         <div class="badge">A Trauma-Informed Sensory Oasis in Hong Kong</div>
-        <h1>在喧囂擁擠的城中，我們陪妳在不被打擾的角落，溫柔復原。</h1>
-        <p style="color: var(--text-muted); margin-bottom: 2.5rem; max-width: 600px; font-size: 1.1rem;">
-            One stitch at a time. A low-pressure, silent remote crochet community for marginalized gender survivors dealing with trauma and isolation.
-        </p>
+        
+        <h1 class="zh">在喧囂擁擠的城中，我們陪妳在不被打擾的角落，溫柔復原。</h1>
+        <h1 class="en">In a crowded city, we accompany you in a quiet corner, healing softly.</h1>
+        
+        <p class="zh">一針一線。一個專為遭受創傷與孤立的女性及邊緣化性別倖存者設計的低壓、靜音遠端鈎織社群。</p>
+        <p class="en">One stitch at a time. A low-pressure, silent remote crochet community for women and marginalized gender survivors dealing with trauma and isolation.</p>
+        
         <!-- 這裡未來放妳的 Google Form 網址 -->
-        <a href="https://forms.google.com" target="_blank" class="cta-btn">申請加入安全織網 / Apply Now</a>
+        <a href="https://forms.google.com" target="_blank" class="cta-btn">
+            <span class="zh">申請加入安全織網</span><span class="en">Apply Now</span>
+        </a>
     </header>
 
     <!-- 核心願景區塊 -->
     <section id="vision">
-        <h2 class="section-title">我們的看見 / Our Vision</h2>
+        <h2 class="section-title"><span class="zh">我們的看見</span><span class="en">Our Vision</span></h2>
         <div class="grid">
-            <div class="bilingual-block">
-                <p>香港是個極度高密度且高壓的城市。對於承受著 PTSD 或性侵害創傷的女孩來說，狹小的居住空間與社會對心理健康的污名化，往往織成了一座無法外出的隱形牢籠。</p>
-                <p class="en-text">Hong Kong is a city of immense density and pressure. For survivors of trauma and sexual assault, cramped living spaces and mental health stigma often form an invisible cage, making social interaction feel impossible.</p>
+            <div>
+                <p class="zh">香港是個極度高密度且高壓的城市。對於承受著 PTSD 或性侵害創傷的女孩來說，狹小的居住空間與社會對心理健康的污名化，往往織成了一座無法外出的隱形牢籠。</p>
+                <p class="en">Hong Kong is a city of immense density and societal pressure. For survivors of trauma and sexual assault, cramped living spaces and mental health stigma often form an invisible cage, making social integration feel overwhelming.</p>
             </div>
-            <div class="bilingual-block">
-                <p>我們不強迫妳說話，也不要求妳出門。我們用一條毛線、一根鈎針，在數位世界為妳隔開外界的雜音，搭建一個一平方公尺的虛擬避風港。</p>
-                <p class="en-text">We don't force you to speak, nor do we ask you to leave your comfort zone. Through the rhythmic movement of yarn, we isolate the noise of the outside world, creating a 1-square-meter sanctuary in the digital realm.</p>
+            <div>
+                <p class="zh">我們不強迫妳說話，也不要求妳出門。我們用一條毛線、一根鈎針，在數位世界為妳隔開外界的雜音，搭建一個一平方公尺的虛擬避風港。</p>
+                <p class="en">We don't force you to speak, nor do we ask you to leave your comfort zone. Through the rhythmic movement of yarn, we isolate the noise of the outside world, creating a 1-square-meter sanctuary in the digital realm.</p>
             </div>
         </div>
     </section>
@@ -230,17 +275,19 @@
     <!-- 計劃內容區塊 -->
     <section id="project" style="background-color: #ffffff; max-width: 100%;">
         <div style="max-width: 1200px; margin: 0 auto; padding: 0 10%;">
-            <h2 class="section-title">療癒項目 / The Ritual</h2>
+            <h2 class="section-title"><span class="zh">療癒項目</span><span class="en">The Ritual</span></h2>
             <div class="grid">
                 <div class="card">
-                    <h3>01. 居家材料包 / Sensory Kits</h3>
-                    <p>免費且完全保密地為妳寄送客製化的「感官療癒毛線包」與工具，從零基礎教學影片開始，順應妳自己的節奏。</p>
-                    <p class="en-text" style="font-size: 0.85rem; margin-top: 0.5rem;">Complimentary and strictly confidential healing yarn kits delivered to your doorstep, complete with gentle, self-paced tutorials.</p>
+                    <h3 class="zh">01. 居家材料包</h3>
+                    <h3 class="en">01. Sensory Kits</h3>
+                    <p class="zh">免費且完全保密地為妳寄送客製化的「感官療癒毛線包」與工具，從零基礎教學影片開始，順應妳自己的節奏。</p>
+                    <p class="en">Complimentary and strictly confidential healing yarn kits delivered to your doorstep, complete with gentle, self-paced video tutorials.</p>
                 </div>
                 <div class="card">
-                    <h3>02. 遠端靜音織間 / Silent Studio</h3>
-                    <p>不開鏡頭、預設靜音的線上陪伴空間。大家只是在溫柔的低頻音樂中，看著彼此專注編織的手部動作，感受無聲的凝聚力。</p>
-                    <p class="en-text" style="font-size: 0.85rem; margin-top: 0.5rem;">Camera-off, muted virtual sessions. We gather in silence under calming ambient music, sharing solidarity through the non-verbal craft of hands.</p>
+                    <h3 class="zh">02. 遠端靜音織間</h3>
+                    <h3 class="en">02. Silent Studio</h3>
+                    <p class="zh">不開鏡頭、預設靜音的線上陪伴空間。大家只是在溫柔的低頻音樂中，看著彼此專注編織的手部動作，感受無聲的凝聚力。</p>
+                    <p class="en">Camera-off, muted virtual sessions. We gather in silence under calming ambient music, sharing solidarity through the non-verbal craft of hands.</p>
                 </div>
             </div>
         </div>
@@ -248,24 +295,42 @@
 
     <!-- 安全防線區塊 -->
     <section id="safety">
-        <h2 class="section-title">安全與邊界 / Boundaries</h2>
-        <div class="bilingual-block" style="text-align: center; max-width: 800px; margin: 0 auto;">
-            <p><strong>【核心安全宣言】</strong> 本組織嚴格限制僅限女性、跨性別及非二元性別等遭受性別暴力的倖存者參與。進入核心社群前均需通過充滿同理心的背景審查，以確保社群具備 100% 的同質性與安全邊界。</p>
-            <p class="en-text" style="margin-top: 1rem;">To protect the psychological safety of our members, this space is strictly reserved for women, trans, and non-binary survivors of gender-based violence. An empathetic background verification is required to maintain a 100% secure, trigger-free boundary.</p>
+        <h2 class="section-title"><span class="zh">安全與邊界</span><span class="en">Boundaries</span></h2>
+        <div style="text-align: center; max-width: 800px; margin: 0 auto;">
+            <p class="zh"><strong>【核心安全宣言】</strong> 本組織嚴格限制僅限女性、跨性別及非二元性別等遭受性別暴力的倖存者參與。進入核心社群前均需通過充滿同理心的背景審查，以確保社群具備 100% 的同質性與安全邊界。</p>
+            <p class="en"><strong>[Core Safety Declaration]</strong> To protect the psychological safety of our members, this space is strictly reserved for women, trans, and non-binary survivors of gender-based violence. An empathetic background verification is required to maintain a 100% secure, trigger-free boundary.</p>
         </div>
 
         <div class="safety-bar">
-            <p><strong>專業安全網提示 / Disclaimer:</strong></p>
-            <p style="margin-top: 0.5rem;">我們提供的是同儕陪伴與感官放鬆，並非專業臨床心理諮商。若妳目前處於嚴重的心理危機，請即時尋求專業協助：</p>
-            <p style="color: var(--text-main); margin-top: 0.5rem;">香港撒瑪利亞防止自殺會：2389 2222 | 醫院管理局精神健康專線：2466 7350</p>
+            <p><strong><span class="zh">專業安全網提示</span><span class="en">Disclaimer</span></strong></p>
+            <p class="zh" style="margin-top: 0.5rem;">我們提供的是同儕陪伴與感官放鬆，並非專業臨床心理諮商。若妳目前處於嚴重的心理危機，請即時尋求專業協助：</p>
+            <p class="en" style="margin-top: 0.5rem;">We provide peer companionship and sensory regulation, not clinical psychotherapy. If you are experiencing an immediate mental health crisis, please reach out to local resources:</p>
+            <p style="color: var(--text-main); margin-top: 0.5rem;">香港撒瑪利亞防止自殺會 HotLine: 2389 2222 | 醫管局精神健康專線: 2466 7350</p>
         </div>
     </section>
 
     <!-- 頁尾 -->
     <footer>
         <p>© 2026 Crochet For Her HK. All rights reserved.</p>
-        <p style="margin-top: 0.5rem;">聯絡我們 / Contact: <a href="mailto:crochetforher.hk@gmail.com" style="color: var(--text-muted); text-decoration: underline;">crochetforher.hk@gmail.com</a></p>
+        <p style="margin-top: 0.5rem;">
+            <span class="zh">聯絡我們：</span><span class="en">Contact: </span>
+            <a href="mailto:crochetforher.hk@gmail.com" style="color: var(--text-muted); text-decoration: underline;">crochetforher.hk@gmail.com</a>
+        </p>
     </footer>
 
+    <!-- 自動切換語言的隱形小工具 -->
+    <script>
+        function setLanguage(lang) {
+            if (lang === 'zh') {
+                document.body.className = 'lang-zh';
+                document.querySelectorAll('.lang-btn')[0].classList.add('active');
+                document.querySelectorAll('.lang-btn')[1].classList.remove('active');
+            } else {
+                document.body.className = 'lang-en';
+                document.querySelectorAll('.lang-btn')[0].classList.remove('active');
+                document.querySelectorAll('.lang-btn')[1].classList.add('active');
+            }
+        }
+    </script>
 </body>
 </html>
