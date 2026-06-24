@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crochet For Her HK | 港織避風角</title>
+    <style>
+        /* rhode 美學核心：低飽和色調與極簡字體 */
+        :root {
+            --bg-color: #f4f3f0; /* rhode 招牌燕麥灰米色 */
+            --card-bg: #ffffff;
+            --text-main: #2d2c2a; /* 深炭灰，比純黑更溫柔 */
+            --text-muted: #767471;
+            --border-color: #e5e3df;
+            --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: var(--font-sans);
+            letter-spacing: -0.02em;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* 導覽列 */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem 5%;
+            background-color: transparent;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .logo {
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            font-size: 0.9rem;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-main);
+        }
+
+        /* 英雄區塊：極致留白與大氣標題 */
+        header {
+            min-height: 75vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 10%;
+        }
+
+        .badge {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+        }
+
+        header h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 400;
+            line-height: 1.1;
+            margin-bottom: 2rem;
+            max-width: 900px;
+        }
+
+        /* rhode 風格按鈕：膠囊形狀、沉穩色調 */
+        .cta-btn {
+            background-color: var(--text-main);
+            color: #ffffff;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            transition: transform 0.2s ease, opacity 0.2s ease;
+        }
+
+        .cta-btn:hover {
+            transform: scale(1.02);
+            opacity: 0.9;
+        }
+
+        /* 內容主體區塊 */
+        section {
+            padding: 6rem 10%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--text-muted);
+            margin-bottom: 3rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+
+        /* 網格佈局 */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+        }
+
+        .card h3 {
+            font-size: 1.25rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* 雙語平行對照區塊 */
+        .bilingual-block {
+            margin-bottom: 2rem;
+        }
+
+        .en-text {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-top: 0.5rem;
+            font-style: italic;
+        }
+
+        /* 隱私與專業安全網 */
+        .safety-bar {
+            background-color: #eae8e3;
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 4rem;
+        }
+
+        /* 頁尾 */
+        footer {
+            padding: 4rem 5%;
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        @media (max-width: 768px) {
+            nav { flex-direction: column; gap: 1rem; }
+            header { min-height: 60vh; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 導覽列 -->
+    <nav>
+        <div class="logo">Crochet For Her HK</div>
+        <ul class="nav-links">
+            <li><a href="#vision">願景 / Vision</a></li>
+            <li><a href="#project">計劃 / Project</a></li>
+            <li><a href="#safety">安全 / Safety</a></li>
+        </ul>
+    </nav>
+
+    <!-- 英雄首頁區塊 -->
+    <header>
+        <div class="badge">A Trauma-Informed Sensory Oasis in Hong Kong</div>
+        <h1>在喧囂擁擠的城中，我們陪妳在不被打擾的角落，溫柔復原。</h1>
+        <p style="color: var(--text-muted); margin-bottom: 2.5rem; max-width: 600px; font-size: 1.1rem;">
+            One stitch at a time. A low-pressure, silent remote crochet community for marginalized gender survivors dealing with trauma and isolation.
+        </p>
+        <!-- 這裡未來放妳的 Google Form 網址 -->
+        <a href="https://forms.google.com" target="_blank" class="cta-btn">申請加入安全織網 / Apply Now</a>
+    </header>
+
+    <!-- 核心願景區塊 -->
+    <section id="vision">
+        <h2 class="section-title">我們的看見 / Our Vision</h2>
+        <div class="grid">
+            <div class="bilingual-block">
+                <p>香港是個極度高密度且高壓的城市。對於承受著 PTSD 或性侵害創傷的女孩來說，狹小的居住空間與社會對心理健康的污名化，往往織成了一座無法外出的隱形牢籠。</p>
+                <p class="en-text">Hong Kong is a city of immense density and pressure. For survivors of trauma and sexual assault, cramped living spaces and mental health stigma often form an invisible cage, making social interaction feel impossible.</p>
+            </div>
+            <div class="bilingual-block">
+                <p>我們不強迫妳說話，也不要求妳出門。我們用一條毛線、一根鈎針，在數位世界為妳隔開外界的雜音，搭建一個一平方公尺的虛擬避風港。</p>
+                <p class="en-text">We don't force you to speak, nor do we ask you to leave your comfort zone. Through the rhythmic movement of yarn, we isolate the noise of the outside world, creating a 1-square-meter sanctuary in the digital realm.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 計劃內容區塊 -->
+    <section id="project" style="background-color: #ffffff; max-width: 100%;">
+        <div style="max-width: 1200px; margin: 0 auto; padding: 0 10%;">
+            <h2 class="section-title">療癒項目 / The Ritual</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>01. 居家材料包 / Sensory Kits</h3>
+                    <p>免費且完全保密地為妳寄送客製化的「感官療癒毛線包」與工具，從零基礎教學影片開始，順應妳自己的節奏。</p>
+                    <p class="en-text" style="font-size: 0.85rem; margin-top: 0.5rem;">Complimentary and strictly confidential healing yarn kits delivered to your doorstep, complete with gentle, self-paced tutorials.</p>
+                </div>
+                <div class="card">
+                    <h3>02. 遠端靜音織間 / Silent Studio</h3>
+                    <p>不開鏡頭、預設靜音的線上陪伴空間。大家只是在溫柔的低頻音樂中，看著彼此專注編織的手部動作，感受無聲的凝聚力。</p>
+                    <p class="en-text" style="font-size: 0.85rem; margin-top: 0.5rem;">Camera-off, muted virtual sessions. We gather in silence under calming ambient music, sharing solidarity through the non-verbal craft of hands.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 安全防線區塊 -->
+    <section id="safety">
+        <h2 class="section-title">安全與邊界 / Boundaries</h2>
+        <div class="bilingual-block" style="text-align: center; max-width: 800px; margin: 0 auto;">
+            <p><strong>【核心安全宣言】</strong> 本組織嚴格限制僅限女性、跨性別及非二元性別等遭受性別暴力的倖存者參與。進入核心社群前均需通過充滿同理心的背景審查，以確保社群具備 100% 的同質性與安全邊界。</p>
+            <p class="en-text" style="margin-top: 1rem;">To protect the psychological safety of our members, this space is strictly reserved for women, trans, and non-binary survivors of gender-based violence. An empathetic background verification is required to maintain a 100% secure, trigger-free boundary.</p>
+        </div>
+
+        <div class="safety-bar">
+            <p><strong>專業安全網提示 / Disclaimer:</strong></p>
+            <p style="margin-top: 0.5rem;">我們提供的是同儕陪伴與感官放鬆，並非專業臨床心理諮商。若妳目前處於嚴重的心理危機，請即時尋求專業協助：</p>
+            <p style="color: var(--text-main); margin-top: 0.5rem;">香港撒瑪利亞防止自殺會：2389 2222 | 醫院管理局精神健康專線：2466 7350</p>
+        </div>
+    </section>
+
+    <!-- 頁尾 -->
+    <footer>
+        <p>© 2026 Crochet For Her HK. All rights reserved.</p>
+        <p style="margin-top: 0.5rem;">聯絡我們 / Contact: <a href="mailto:crochetforher.hk@gmail.com" style="color: var(--text-muted); text-decoration: underline;">crochetforher.hk@gmail.com</a></p>
+    </footer>
+
+</body>
+</html>
