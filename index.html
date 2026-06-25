@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crochet For Her HK | 港織避風角</title>
+    <title>Crochet For Her HK</title>
     <style>
         /* rhode 美學核心：低飽和色調與極簡字體 */
         :root {
@@ -80,7 +80,7 @@
             color: var(--text-main);
         }
 
-        /* rhode 風格語言切換鈕 */
+        /* rhode 形象語言切換鈕 */
         .lang-switch {
             display: flex;
             gap: 0.5rem;
@@ -276,9 +276,14 @@
         <p class="zh">我們用一針一線創造一個低壓、療愈的靜音遠端鈎織社群。</p>
         <p class="en">Stitch by stitch, we create a low-pressure, healing, and silent remote crocheting community.</p>
         
-        <a href="https://forms.google.com" target="_blank" class="cta-btn">
-            <span class="zh">申請加入安全織網</span><span class="en">Apply Now</span>
-        </a>
+        <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; margin-top: 1rem;">
+            <a href="https://forms.google.com" target="_blank" class="cta-btn">
+                <span class="zh">申請加入安全織網</span><span class="en">Apply Now</span>
+            </a>
+            <a href="#" class="cta-btn" style="background-color: transparent; border: 1px solid var(--text-main); color: var(--text-main);">
+                <span class="zh">購買製成品</span><span class="en">Shop Crafts</span>
+            </a>
+        </div>
     </header>
 
     <section id="vision" class="fade-in-section">
@@ -299,17 +304,31 @@
         <div style="max-width: 1200px; margin: 0 auto; padding: 0 10%;">
             <h2 class="section-title"><span class="zh">療癒項目</span><span class="en">The Ritual</span></h2>
             <div class="grid">
-                <div class="card">
-                    <h3 class="zh">01. 居家材料包</h3>
-                    <h3 class="en">01. Sensory Kits</h3>
-                    <p class="zh">以相宜的價格為妳寄送能製成不同作品的「感官療癒毛線包」與工具，從零基礎教學影片開始，順應妳自己的節奏。</p>
-<p class="en">Delivering versatile "Sensory Healing Yarn Kits" and essential tools to your doorstep at an affordable price, complete with self-paced, beginner-friendly video tutorials.</p>
+                <div class="card" onclick="openKitModal()" style="cursor: pointer; transition: transform 0.2s ease, border-color 0.2s ease; display: flex; flex-direction: column; height: 100%; justify-content: space-between;">
+                    <div>
+                        <h3 class="zh">01. 居家材料包</h3>
+                        <h3 class="en">01. Sensory Kits</h3>
+                        <p class="zh">以相宜的價格為妳寄送能製成不同作品的「感官療癒毛線包」與工具，從零基礎教學影片開始，順應妳自己的節奏。</p>
+                        <p class="en">Delivering versatile "Sensory Healing Yarn Kits" and essential tools to your doorstep at an affordable price, complete with self-paced, beginner-friendly video tutorials.</p>
+                    </div>
+                    <div style="margin-top: 1.5rem; text-align: right;">
+                        <span class="zh" style="font-size: 0.85rem; font-weight: 500; letter-spacing: 0.05em; border-bottom: 1px solid #2d2c2a; padding-bottom: 2px;">了解更多 →</span>
+                        <span class="en" style="font-size: 0.85rem; font-weight: 500; letter-spacing: 0.05em; border-bottom: 1px solid #2d2c2a; padding-bottom: 2px;">Learn More →</span>
+                    </div>
                 </div>
+
                 <div class="card">
                     <h3 class="zh">02. 遠端靜音織間</h3>
                     <h3 class="en">02. Silent Studio</h3>
-                  <p class="zh">在這個預設靜音的線上陪伴空間，妳可以自己選擇是否開鏡頭。大家在溫柔的低頻音樂中，看著彼此專注編織的手部動作，感受無聲的凝聚力。</p>
-<p class="en">In this pre-muted virtual sanctuary, you hold the freedom to choose whether to turn on your camera. We gather under calming ambient music, sharing wordless solidarity through the focused movement of our hands.</p>
+                    <p class="zh">在這個預設靜音的線上陪伴空間，妳可以自己選擇是否開鏡頭。大家在溫柔的低頻音樂中，看著彼此專注編織的手部動作，感受無聲的凝聚力。</p>
+                    <p class="en">In this pre-muted virtual sanctuary, you hold the freedom to choose whether to turn on your camera. We gather under calming ambient music, sharing wordless solidarity through the focused movement of our hands.</p>
+                </div>
+
+                <div class="card">
+                    <h3 class="zh">03. 寄賣平台</h3>
+                    <h3 class="en">03. Consignment Platform</h3>
+                    <p class="zh">製成品除了可以自留，我們亦提供寄賣平台，讓倖存者無法出門工作時亦能賺取收入，維持日常開支。</p>
+                    <p class="en">In addition to keeping your crafts, we offer a consignment platform that enables survivors to earn an income and cover daily expenses, even when working outside the home isn't an option.</p>
                 </div>
             </div>
         </div>
@@ -338,6 +357,63 @@
         </p>
     </footer>
 
+    <div id="kitModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(45, 44, 42, 0.15); z-index: 9999; justify-content: center; align-items: center; padding: 2rem; backdrop-filter: blur(8px);">
+        <div style="background-color: #ffffff; width: 100%; max-width: 850px; max-height: 85vh; border-radius: 16px; border: 1px solid #e5e3df; padding: 3.5rem 3rem 3rem 3rem; position: relative; overflow-y: auto; box-shadow: 0 10px 30px rgba(0,0,0,0.03); font-family: -apple-system, BlinkMacSystemFont, sans-serif; color: #2d2c2a;">
+            
+            <button onclick="closeKitModal(event)" style="position: absolute; top: 1.5rem; right: 1.5rem; background: none; border: none; font-size: 1.2rem; font-weight: 300; color: #767471; cursor: pointer;">✕</button>
+            
+            <div style="text-align: center; margin-bottom: 3.5rem;">
+                <h2 class="zh" style="font-size: 1.8rem; font-weight: 400; letter-spacing: 0.05em; margin-bottom: 0.6rem;">感官療癒毛線包</h2>
+                <h2 class="en" style="font-size: 1.8rem; font-weight: 400; letter-spacing: 0.05em; margin-bottom: 0.6rem;">Sensory Healing Yarn Kits</h2>
+                <p class="zh" style="color: #767471; font-size: 0.9rem;">順應妳自己的節奏，用雙手編織出專屬的平靜空間。</p>
+                <p class="en" style="color: #767471; font-size: 0.9rem;">Follow your own pace, crafting a sanctuary of peace with your own hands.</p>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 3rem; margin-bottom: 2.5rem;">
+                
+                <div style="border-right: 1px solid #eae8e3; padding-right: 1.5rem;">
+                    <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: #767471; margin-bottom: 0.6rem;"><span class="zh">適合完全零基礎</span><span class="en">For Absolute Beginners</span></div>
+                    <h3 class="zh" style="font-size: 1.25rem; font-weight: 500; margin-bottom: 1rem;">01. 基礎療癒毛線包 (Beginner Kit)</h3>
+                    <h3 class="en" style="font-size: 1.25rem; font-weight: 500; margin-bottom: 1rem;">01. Complete Beginner Kit</h3>
+                    <p class="zh" style="color: #767471; font-size: 0.9rem; line-height: 1.6; margin-bottom: 1.5rem;">內含全套所需的高品質工具與材料，搭配精心錄製的教學影片，讓妳在重複的針線律動中放下焦慮。</p>
+                    <p class="en" style="color: #767471; font-size: 0.9rem; line-height: 1.6; margin-bottom: 1.5rem;">Contains a full suite of premium tools and materials, with video tutorials to help you start your journey with ease.</p>
+                    
+                    <strong style="font-size: 0.85rem; font-weight: 600; display: block; margin-bottom: 0.6rem;"><span class="zh">工具與材料清單：</span><span class="en">What's Included:</span></strong>
+                    <ul style="list-style: none; font-size: 0.9rem; padding-left: 0; line-height: 1.8;">
+                        <li style="margin-bottom: 0.3rem;">• <span class="zh">精選毛線 × 1 (1 Yarn)</span><span class="en">Premium Yarn × 1</span></li>
+                        <li style="margin-bottom: 0.3rem;">• <span class="zh">專用記號扣 × 5 (5 Stitch Markers)</span><span class="en">Stitch Markers × 5</span></li>
+                        <li style="margin-bottom: 0.3rem;">• <span class="zh">人體工學鈎針 × 1 (1 Hook)</span><span class="en">Crochet Hook × 1</span></li>
+                        <li style="margin-bottom: 0.3rem;">• <span class="zh">雙線專用導線器 × 1 (1 Yarn Holder)</span><span class="en">Dual Yarn Holder × 1</span></li>
+                        <li style="margin-bottom: 0.3rem;">• <span class="zh">線上影片教學課程 (Tutorial Video)</span><span class="en">Video Tutorials</span></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: #767471; margin-bottom: 0.6rem;"><span class="zh">適合已有基礎者</span><span class="en">For Experienced Crafters</span></div>
+                    <h3 class="zh" style="font-size: 1.25rem; font-weight: 500; margin-bottom: 1rem;">02. 進階主題毛線包 (Intermediate Kit)</h3>
+                    <h3 class="en" style="font-size: 1.25rem; font-weight: 500; margin-bottom: 1rem;">02. Intermediate Project Kit</h3>
+                    <p class="zh" style="color: #767471; font-size: 0.9rem; line-height: 1.6; margin-bottom: 1.5rem;">專注於特定作品的主題包（Projects-themed）。為了環保與避免重複浪費，本材料包【不自動附帶】基礎工具（如鈎針、記號扣、導線器）。</p>
+                    <p class="en" style="color: #767471; font-size: 0.9rem; line-height: 1.6; margin-bottom: 1.5rem;">Themed kits focusing on specific items. Basic tools are 【not automatically included】 to encourage eco-friendly crafting.</p>
+                    
+                    <strong style="font-size: 0.85rem; font-weight: 600; display: block; margin-bottom: 0.6rem;"><span class="zh">可選主題作品線 (Projects-themed)：</span><span class="en">Available Themes:</span></strong>
+                    <ul style="list-style: none; font-size: 0.9rem; padding-left: 0; line-height: 1.8;">
+                        <li style="margin-bottom: 0.3rem;">• <span class="zh">精美日常飾品系列 (Accessories)</span><span class="en">Exquisite Accessories</span></li>
+                        <li style="margin-bottom: 0.3rem;">• <span class="zh">溫柔毛衣/開襟衫系列 (Cardigans)</span><span class="en">Cozy Cardigans</span></li>
+                        <li style="margin-bottom: 0.3rem;">• <span class="zh">隨性百搭上衣系列 (Tops)</span><span class="en">Versatile Tops</span></li>
+                        <li style="margin-bottom: 0.3rem;">• <span class="zh">極簡感官編織包系列 (Bags)</span><span class="en">Minimalist Bags</span></li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div style="background-color: #f4f3f0; padding: 1.5rem; border-radius: 12px; text-align: center; font-size: 0.85rem; border: 1px solid #eae8e3;">
+                <p class="zh"><strong>【作品去向自主】</strong> 妳完成的所有成品（Product）皆可自由選擇自留，或透過我們的寄賣平台出售賺取日常開支。</p>
+                <p class="en"><strong>[Creative Autonomy]</strong> You hold full autonomy to keep your completed products or list them for sale via our platform to support your livelihood.</p>
+            </div>
+
+        </div>
+    </div>
+
     <script>
         // 語言切換
         function setLanguage(lang) {
@@ -356,20 +432,47 @@
         document.addEventListener("DOMContentLoaded", function () {
             const fadeEls = document.querySelectorAll(".fade-in-section");
             
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach((entry) => {
+            const scrollObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        entry.target.classList.add("is-visible");
+                        entry.target.classList.add('is-visible');
+                    } else {
+                        entry.target.classList.remove('is-visible');
                     }
                 });
             }, {
-                threshold: 0.1, // 進入畫面 10% 時觸發
-                rootMargin: "0px 0px -30px 0px"
+                threshold: 0.1
             });
 
-            fadeEls.forEach((el) => observer.observe(el));
+            fadeEls.forEach(elem => {
+                scrollObserver.observe(elem);
+            });
+        });
+
+        // 彈出視窗開關控制邏輯
+        function openKitModal() {
+            const modal = document.getElementById('kitModal');
+            if(modal) {
+                modal.style.display = 'flex';
+                document.body.style.overflow = 'hidden'; 
+            }
+        }
+
+        function closeKitModal(event) {
+            if(event) event.stopPropagation();
+            const modal = document.getElementById('kitModal');
+            if(modal) {
+                modal.style.display = 'none';
+                document.body.style.overflow = ''; 
+            }
+        }
+
+        window.addEventListener('click', function(event) {
+            const modal = document.getElementById('kitModal');
+            if (event.target == modal) {
+                closeKitModal();
+            }
         });
     </script>
 </body>
 </html>
-    
