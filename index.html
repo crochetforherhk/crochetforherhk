@@ -43,18 +43,18 @@
         /* 專業圖片 Logo 按鈕排版設定 */
         .logo-btn {
             display: inline-block;
-            height: 45px; /* 這裡可以自由調整妳的 Logo 在網頁上的高度 */
+            height: 45px;
             transition: opacity 0.2s ease;
         }
 
         .logo-btn:hover {
-            opacity: 0.85; /* 滑鼠移過去時會微微變透明，提示這是可以點擊的按鈕 */
+            opacity: 0.85;
         }
 
         .logo-btn img {
             height: 100%;
             width: auto;
-            object-fit: contain; /* 確保 Logo 圖片絕對不會被壓扁或拉伸變形 */
+            object-fit: contain;
         }
 
         .nav-right {
@@ -108,6 +108,19 @@
         /* 語言顯示控制邏輯 */
         .lang-zh .en, .lang-en .zh {
             display: none !important;
+        }
+
+        /* 🎬 溫柔漸入效果的 CSS 樣式 */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1.2s ease-out, transform 1.2s ease-out;
+            will-change: opacity, transform;
+        }
+
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         /* 英雄區塊：極致留白與大氣標題 */
@@ -231,12 +244,9 @@
         }
     </style>
 </head>
-<!-- 預設為中文介面 -->
 <body class="lang-zh">
 
-    <!-- 導覽列 -->
     <nav>
-        <!-- 點擊會跳回頂端的圖片 Logo 按鈕 -->
         <a href="#" class="logo-btn" title="返回首頁 / Back to Home">
             <img src="logo.png" alt="Crochet For Her HK Logo">
         </a>
@@ -247,7 +257,6 @@
                 <li><a href="#project"><span class="zh">計劃</span><span class="en">Project</span></a></li>
                 <li><a href="#safety"><span class="zh">安全邊界</span><span class="en">Safety</span></a></li>
             </ul>
-            <!-- 切換按鈕 -->
             <div class="lang-switch">
                 <button class="lang-btn active" onclick="setLanguage('zh')">繁中</button>
                 <button class="lang-btn" onclick="setLanguage('en')">EN</button>
@@ -255,9 +264,8 @@
         </div>
     </nav>
 
-    <!-- 英雄首頁區塊 -->
     <header class="fade-in-section">
- <div class="badge">
+        <div class="badge">
             <span class="zh">一個專為遭受性侵害與 PTSD 的女性與非二元性別倖存者而設的安全織間</span>
             <span class="en">A safe crocheting space for female / non-binary sexual assault and PTSD survivors</span>
         </div>
@@ -265,22 +273,20 @@
         <h1 class="zh">在喧囂擁擠的城中，我們陪妳在不被打擾的角落，溫柔復原。</h1>
         <h1 class="en">In a crowded city, we accompany you in a quiet corner, healing softly.</h1>
         
-        <p class="subheading-zh">我們用一針一線創造一個低壓、療愈的靜音遠端鈎織社群。</p>
-<p class="subheading-en">Stitch by stitch, we create a low-pressure, healing, and silent remote crocheting community.</p>
+        <p class="zh">我們用一針一線創造一個低壓、療愈的靜音遠端鈎織社群。</p>
+        <p class="en">Stitch by stitch, we create a low-pressure, healing, and silent remote crocheting community.</p>
         
-        <!-- 這裡未來放妳的 Google Form 網址 -->
         <a href="https://forms.google.com" target="_blank" class="cta-btn">
             <span class="zh">申請加入安全織網</span><span class="en">Apply Now</span>
         </a>
     </header>
 
-    <!-- 核心願景區塊 -->
-    <section id="vision"class="fade-in-section">
+    <section id="vision" class="fade-in-section">
         <h2 class="section-title"><span class="zh">我們的願景</span><span class="en">Our Vision</span></h2>
         <div class="grid">
             <div>
                 <p class="zh">香港是個極度高密度且高壓的城市，對於承受著 PTSD 或性侵害創傷的女孩來說，狹小的城市空間與擠迫的人流，往往織成了一座無法外出的隱形牢籠。</p>
-                <p class="en">As a city of immense density and societal pressure, Hong Kong's cramped living space and the hustle and bustle becomes an invisible cage for female survivors of trauma and sexual assault. </p>
+                <p class="en">As a city of immense density and societal pressure, Hong Kong's cramped living space and the hustle and bustle becomes an invisible cage for female survivors of trauma and sexual assault.</p>
             </div>
             <div>
                 <p class="zh">在這裏，你不需要説話和社交，亦不需要出門。我們用一條毛線、一根鈎針，在數位世界為妳隔開外界的雜音，搭建一個安靜虛擬避風港。</p>
@@ -289,8 +295,7 @@
         </div>
     </section>
 
-    <!-- 計劃內容區塊 -->
-    <section id="project" style="background-color: #ffffff; max-width: 100%;">
+    <section id="project" class="fade-in-section" style="background-color: #ffffff; max-width: 100%;">
         <div style="max-width: 1200px; margin: 0 auto; padding: 0 10%;">
             <h2 class="section-title"><span class="zh">療癒項目</span><span class="en">The Ritual</span></h2>
             <div class="grid">
@@ -310,8 +315,7 @@
         </div>
     </section>
 
-    <!-- 安全防線區塊 -->
-    <section id="safety"class="fade-in-section">
+    <section id="safety" class="fade-in-section">
         <h2 class="section-title"><span class="zh">安全與邊界</span><span class="en">Boundaries</span></h2>
         <div style="text-align: center; max-width: 800px; margin: 0 auto;">
             <p class="zh"><strong>【核心安全宣言】</strong> 本組織嚴格限制僅限女性、跨性別及非二元性別等遭受性別暴力的倖存者參與。進入核心社群前均需通過充滿同理心的背景審查，以確保社群具備 100% 的同質性與安全邊界。</p>
@@ -326,7 +330,6 @@
         </div>
     </section>
 
-    <!-- 頁尾 -->
     <footer>
         <p>© 2026 Crochet For Her HK. All rights reserved.</p>
         <p style="margin-top: 0.5rem;">
@@ -335,8 +338,8 @@
         </p>
     </footer>
 
-    <!-- 自動切換語言的隱形小工具 -->
     <script>
+        // 語言切換
         function setLanguage(lang) {
             if (lang === 'zh') {
                 document.body.className = 'lang-zh';
@@ -348,6 +351,25 @@
                 document.querySelectorAll('.lang-btn')[1].classList.add('active');
             }
         }
+
+        // 滾動漸入偵測（Intersection Observer）
+        document.addEventListener("DOMContentLoaded", function () {
+            const fadeEls = document.querySelectorAll(".fade-in-section");
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("is-visible");
+                    }
+                });
+            }, {
+                threshold: 0.1, // 進入畫面 10% 時觸發
+                rootMargin: "0px 0px -30px 0px"
+            });
+
+            fadeEls.forEach((el) => observer.observe(el));
+        });
     </script>
 </body>
 </html>
+    
