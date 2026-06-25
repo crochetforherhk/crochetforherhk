@@ -355,9 +355,11 @@
     <div id="kitModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(45, 44, 42, 0.15); z-index: 9999; justify-content: center; align-items: center; padding: 2rem; backdrop-filter: blur(8px);">
         <div style="background-color: #ffffff; width: 100%; max-width: 850px; max-height: 85vh; border-radius: 16px; border: 1px solid #e5e3df; padding: 3.5rem 3rem 3rem 3rem; position: relative; overflow-y: auto; box-shadow: 0 10px 30px rgba(0,0,0,0.03); font-family: -apple-system, BlinkMacSystemFont, sans-serif; color: #2d2c2a;">
             
+         <div id="kitModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(45, 44, 42, 0.15); z-index: 9999; justify-content: center; align-items: center; padding: 2rem; backdrop-filter: blur(8px);">
+        <div style="background-color: #ffffff; width: 100%; max-width: 850px; max-height: 85vh; border-radius: 16px; border: 1px solid #e5e3df; padding: 3.5rem 3rem 3rem 3rem; position: relative; overflow-y: auto; box-shadow: 0 10px 30px rgba(0,0,0,0.03); font-family: -apple-system, BlinkMacSystemFont, sans-serif; color: #2d2c2a;">
+            
             <button onclick="closeKitModal(event)" style="position: absolute; top: 1.5rem; right: 1.5rem; background: none; border: none; font-size: 1.2rem; font-weight: 300; color: #767471; cursor: pointer;">✕</button>
             
-            <!-- 彈出視窗標題 -->
             <div style="text-align: center; margin-bottom: 3.5rem;">
                 <h2 class="zh" style="font-size: 1.8rem; font-weight: 400; letter-spacing: 0.05em; margin-bottom: 0.6rem;">感官療癒毛線包</h2>
                 <p class="zh" style="color: #767471; font-size: 0.9rem;">順應妳自己的節奏，用雙手編織出專屬的平靜空間。</p>
@@ -366,76 +368,68 @@
                 <p class="en" style="color: #767471; font-size: 0.9rem;">Stitch by stitch, weave your own peaceful space at your own pace.</p>
             </div>
 
-            <!-- 兩欄內容 -->
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 3rem; margin-bottom: 2.5rem;">
                 
-                <!-- 01. 基礎療癒毛線包 -->
                 <div style="border-right: 1px solid #eae8e3; padding-right: 1.5rem;">
-                    <!-- 繁中版 -->
                     <div class="zh">
                         <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: #767471; margin-bottom: 0.6rem;">適合完全零基礎</div>
                         <h3 style="font-size: 1.25rem; font-weight: 500; margin-bottom: 1rem;">01. 基礎療癒毛線包</h3>
-                        <p style="color: #767471; font-size: 0.9rem; line-height: 1.6; margin-bottom: 1.5rem;">內含全套所需的基本工具與材料，搭配精心錄製的教學影片，讓妳在重複的針線律動中放下焦慮。</p>
+                        <p style="color: #767471; font-size: 0.9rem; line-height: 1.6; margin-bottom: 1.5rem;">內含全套所需的高品質工具與材料，搭配精心錄製的教學影片，讓妳在重複的針線律動中放下焦慮。</p>
                         <strong style="font-size: 0.85rem; font-weight: 600; display: block; margin-bottom: 0.6rem;">工具與材料清單：</strong>
                         <ul style="list-style: none; font-size: 0.9rem; padding-left: 0; line-height: 1.8;">
                             <li style="margin-bottom: 0.3rem;">• 精選毛線 × 1</li>
                             <li style="margin-bottom: 0.3rem;">• 專用記號扣 × 5</li>
-                            <li style="margin-bottom: 0.3rem;">• 鈎針 × 1</li>
-                            <li style="margin-bottom: 0.3rem;">• 毛綫軸 × 1</li>
+                            <li style="margin-bottom: 0.3rem;">• 人體工學鈎針 × 1</li>
+                            <li style="margin-bottom: 0.3rem;">• 雙線專用導線器 × 1</li>
                             <li style="margin-bottom: 0.3rem;">• 線上影片教學課程</li>
                             <li style="margin-bottom: 0.3rem; color: #767471; padding-left: 0.5rem;">- 免費解難</li>
                         </ul>
                     </div>
-                    <!-- 英文版 -->
                     <div class="en">
                         <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: #767471; margin-bottom: 0.6rem;">Perfect for Beginners</div>
                         <h3 style="font-size: 1.25rem; font-weight: 500; margin-bottom: 1rem;">01. Beginner Kit</h3>
-                        <p style="color: #767471; font-size: 0.9rem; line-height: 1.6; margin-bottom: 1.5rem;">Includes a complete set of essential tools and materials, paired with carefully recorded video tutorials to help you ease anxiety through rhythmic stitching.</p>
+                        <p style="color: #767471; font-size: 0.9rem; line-height: 1.6; margin-bottom: 1.5rem;">Includes a complete set of high-quality tools and materials, paired with carefully recorded video tutorials to help you ease anxiety through rhythmic stitching.</p>
                         <strong style="font-size: 0.85rem; font-weight: 600; display: block; margin-bottom: 0.6rem;">Tools & Materials List:</strong>
                         <ul style="list-style: none; font-size: 0.9rem; padding-left: 0; line-height: 1.8;">
                             <li style="margin-bottom: 0.3rem;">• Premium Yarn × 1</li>
                             <li style="margin-bottom: 0.3rem;">• Stitch Markers × 5</li>
-                            <li style="margin-bottom: 0.3rem;">• Crochet Hook × 1</li>
-                            <li style="margin-bottom: 0.3rem;">• Yarn Holder × 1</li>
+                            <li style="margin-bottom: 0.3rem;">• Ergonomic Crochet Hook × 1</li>
+                            <li style="margin-bottom: 0.3rem;">• Dual-Yarn Guide × 1</li>
                             <li style="margin-bottom: 0.3rem;">• Online Video Tutorials</li>
                             <li style="margin-bottom: 0.3rem; color: #767471; padding-left: 0.5rem;">- Free Troubleshooting Support</li>
                         </ul>
                     </div>
                 </div>
 
-                <!-- 02. 進階主題毛線包 -->
                 <div>
-                    <!-- 繁中版 -->
                     <div class="zh">
                         <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: #767471; margin-bottom: 0.6rem;">適合已有基礎者</div>
                         <h3 style="font-size: 1.25rem; font-weight: 500; margin-bottom: 1rem;">02. 進階主題毛線包</h3>
                         <p style="color: #767471; font-size: 0.9rem; line-height: 1.6; margin-bottom: 1.5rem;">專注於特定作品的主題包。為了環保與避免重複浪費，本材料包【不自動附帶】基礎工具（如鈎針、記號扣、導線器）。</p>
-                        <strong style="font-size: 0.85rem; font-weight: 600; display: block; margin-bottom: 0.6rem;">現可選主題作品線：</strong>
+                        <strong style="font-size: 0.85rem; font-weight: 600; display: block; margin-bottom: 0.6rem;">可選主題作品線：</strong>
                         <ul style="list-style: none; font-size: 0.9rem; padding-left: 0; line-height: 1.8;">
-                            <li style="margin-bottom: 0.3rem;">• 日常飾品系列</li>
-                            <li style="margin-bottom: 0.3rem;">• 毛衣/開襟衫系列</li>
-                            <li style="margin-bottom: 0.3rem;">• 上衣系列</li>
-                            <li style="margin-bottom: 0.3rem;">• 編織包系列</li>
+                            <li style="margin-bottom: 0.3rem;">• 精美日常飾品系列</li>
+                            <li style="margin-bottom: 0.3rem;">• 溫柔毛衣/開襟衫系列</li>
+                            <li style="margin-bottom: 0.3rem;">• 隨性百搭上衣系列</li>
+                            <li style="margin-bottom: 0.3rem;">• 極簡感官編織包系列</li>
                         </ul>
                     </div>
-                    <!-- 英文版 -->
                     <div class="en">
                         <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: #767471; margin-bottom: 0.6rem;">For Experienced Crocheters</div>
                         <h3 style="font-size: 1.25rem; font-weight: 500; margin-bottom: 1rem;">02. Intermediate Kit</h3>
-                        <p style="color: #767471; font-size: 0.9rem; line-height: 1.6; margin-bottom: 1.5rem;">Project-themed kits focusing on specific creations. To minimize waste, basic tools (hooks, markers, guides) are 【not automatically included】.</p>
+                        <p style="color: #767471; font-size: 0.9rem; line-height: 1.6; margin-bottom: 1.5rem;">Project-themed kits focusing on specific creations. To minimize waste and promote sustainability, basic tools (hooks, markers, guides) are 【not automatically included】.</p>
                         <strong style="font-size: 0.85rem; font-weight: 600; display: block; margin-bottom: 0.6rem;">Available Project Lines:</strong>
                         <ul style="list-style: none; font-size: 0.9rem; padding-left: 0; line-height: 1.8;">
                             <li style="margin-bottom: 0.3rem;">• Daily Accessories Series</li>
                             <li style="margin-bottom: 0.3rem;">• Cardigans & Sweaters Series</li>
-                            <li style="margin-bottom: 0.3rem;">• Tops Series</li>
-                            <li style="margin-bottom: 0.3rem;">• Aesthetic Bags Series</li>
+                            <li style="margin-bottom: 0.3rem;">• Versatile Tops Series</li>
+                            <li style="margin-bottom: 0.3rem;">• Minimalist Aesthetic Bags Series</li>
                         </ul>
                     </div>
                 </div>
 
             </div>
 
-            <!-- 作品去向自主 -->
             <div style="background-color: #f4f3f0; padding: 1.5rem; border-radius: 12px; text-align: center; font-size: 0.85rem; border: 1px solid #eae8e3; margin-top: 2.5rem;">
                 <p class="zh"><strong>【作品去向自主】</strong> 妳完成的所有成品皆可自由選擇自留，或透過我們的寄賣平台出售賺取日常開支。</p>
                 <p class="en"><strong>[Autonomy of Your Crafts]</strong> All finished items can be kept for personal use or sold through our consignment platform to support daily expenses.</p>
