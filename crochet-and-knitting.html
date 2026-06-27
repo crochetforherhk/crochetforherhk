@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crochet & Knitting | Crochet For Her HK</title>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <style>
+        :root {
+            --bg-color: #f4f3f0; /* rhode 燕麥灰米色 */
+            --card-bg: #ffffff;
+            --text-main: #2d2c2a;
+            --text-muted: #767471;
+            --border-color: #e5e3df;
+            --accent-staff: #8c8275;
+            --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: var(--font-sans);
+            letter-spacing: -0.01em;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-left { display: flex; align-items: center; gap: 1.5rem; }
+        .back-home { color: var(--text-muted); text-decoration: none; font-size: 0.9rem; }
+        .back-home:hover { color: var(--text-main); }
+
+        .nav-right { display: flex; align-items: center; gap: 1.5rem; }
+
+        .mode-toggle-container {
+            display: none;
+            align-items: center;
+            gap: 0.8rem;
+            background: rgba(255, 255, 255, 0.6);
+            padding: 0.4rem 1rem;
+            border-radius: 30px;
+            border: 1px solid var(--border-color);
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 44px;
+            height: 24px;
+        }
+        .switch input { opacity: 0; width: 0; height: 0; }
+        .slider {
+            position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0;
+            background-color: #cbd5e1; transition: .3s; border-radius: 24px;
+        }
+        .slider:before {
+            position: absolute; content: ""; height: 18px; width: 18px; left: 3px; bottom: 3px;
+            background-color: white; transition: .3s; border-radius: 50%;
+        }
+        input:checked + .slider { background-color: var(--accent-staff); }
+        input:checked + .slider:before { transform: translateX(20px); }
+
+        main { padding: 4rem 5%; max-width: 1200px; margin: 0 auto; }
+
+        .header-title { text-align: center; margin-bottom: 4rem; }
+        .header-title h1 { font-size: 2.2rem; font-weight: 400; margin-bottom: 0.5rem; }
+        .header-title p { color: var(--text-muted); font-size: 0.95rem; }
+
+        /* 分類標籤 */
+        .category-title {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--text-muted);
+            margin: 3rem 0 1.5rem 0;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+
+        /* 職員面板 */
+        #staff-panel {
+            display: none;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 2.5rem;
+            border-radius: 16px;
+            margin-bottom: 4rem;
+        }
+        
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .form-group { display: flex; flex-direction: column; gap: 0.5rem; }
+        .form-group label { font-size: 0.85rem; color: var(--text-muted); }
+        .form-group input, .form-group textarea, .form-group select {
+            padding: 0.75rem; border: 1px solid var(--border-color);
+            border-radius: 8px; background-color: #faf9f6;
+            color: var(--text-main); font-family: inherit; font-size: 0.9rem;
+        }
+
+        .submit-btn {
+            background-color: var(--text-main); color: #fff; border: none;
+            padding: 0.8rem 2rem; border-radius: 50px; cursor: pointer; font-size: 0.9rem;
+        }
+
+        /* 商品展示 */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .product-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .product-image-placeholder {
+            width: 100%; height: 280px; background-color: #faf9f6;
+            display: flex; align-items: center; justify-content: center;
+            color: var(--text-muted); font-size: 0.85rem; border-bottom: 1px solid var(--border-color);
+        }
+
+        .product-info { padding: 1.5rem; }
+        .product-title { font-size: 1.1rem; font-weight: 400; margin-bottom: 0.5rem; }
+        .product-meta { display: flex; justify-content: space-between; align-items: center; margin-top: 1rem; }
+        .product-price { font-weight: 500; font-size: 1.05rem; }
+        
+        .buy-btn {
+            background: none; border: 1px solid var(--text-main); padding: 0.4rem 1rem;
+            border-radius: 50px; cursor: pointer; font-size: 0.8rem; transition: all 0.2s;
+        }
+        .buy-btn:hover { background-color: var(--text-main); color: #fff; }
+
+        .staff-actions { display: none; position: absolute; top: 10px; right: 10px; }
+        .delete-btn { background: rgba(239, 68, 68, 0.9); color: white; border: none; padding: 0.3rem 0.7rem; border-radius: 4px; cursor: pointer; font-size: 0.75rem; }
+
+        body.staff-mode-active { border-top: 4px solid var(--accent-staff); }
+        body.staff-mode-active .staff-actions { display: flex; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="nav-left">
+            <a href="index.html" class="back-home">← 返回主頁</a>
+            <span style="font-weight: 500; font-size: 0.95rem;">Crochet & Knitting</span>
+        </div>
+        <div class="nav-right">
+            <div class="mode-toggle-container" id="toggle-container">
+                <span id="mode-status" style="font-size: 0.85rem;">顧客視角</span>
+                <label class="switch">
+                    <input type="checkbox" id="mode-checkbox" onchange="toggleViewMode()">
+                    <span class="slider"></span>
+                </label>
+            </div>
+            <div id="g_id_onload"
+                 data-client_id="YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com"
+                 data-context="signin"
+                 data-ux_mode="popup"
+                 data-callback="handleCredentialResponse">
+            </div>
+            <div class="g_id_signin" data-type="standard" data-shape="pill" data-theme="outline" data-size="medium"></div>
+        </div>
+    </nav>
+
+    <main>
+        <div class="header-title">
+            <h1>Crochet & Knitting 集市</h1>
+            <p>在這裡，妳可以挑選倖存者親手鈎織的溫柔成品，或是帶走一扎療癒感官的嚴選毛線。</p>
+        </div>
+
+        <!-- 職員上架後台 -->
+        <section id="staff-panel">
+            <h3 style="color: var(--accent-staff); margin-bottom: 1.5rem;">🛠️ 職員後台：新增商品</h3>
+            <form id="product-form" onsubmit="addNewProduct(event)">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="prod-type">商品分類</label>
+                        <select id="prod-type">
+                            <option value="craft">倖存者手作製成品 (Crafts)</option>
+                            <option value="yarn">療癒毛線材料 (Yarn)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="prod-title">商品名稱</label>
+                        <input type="text" id="prod-title" required placeholder="例如：霧粉色冰條線 / 療癒編織包">
+                    </div>
+                    <div class="form-group">
+                        <label for="prod-price">定價 (HKD)</label>
+                        <input type="number" id="prod-price" required placeholder="80">
+                    </div>
+                </div>
+                <div class="form-group" style="margin-bottom: 1.5rem;">
+                    <label for="prod-desc">商品描述</label>
+                    <textarea id="prod-desc" rows="2" placeholder="詳細規格或手作背後的小故事..."></textarea>
+                </div>
+                <button type="submit" class="submit-btn">+ 確認發佈商品</button>
+            </form>
+        </section>
+
+        <!-- 分類一：製成品 -->
+        <h2 class="category-title">01. 倖存者手作製成品 / Finished Crafts</h2>
+        <div class="products-grid" id="crafts-container">
+            <div class="product-card" data-id="1">
+                <div class="staff-actions"><button class="delete-btn" onclick="deleteProduct(1)">下架</button></div>
+                <div class="product-image-placeholder">[ 織品成品影像 ]</div>
+                <div class="product-info">
+                    <h4 class="product-title">溫柔厚實麻花編織包</h4>
+                    <p style="color: var(--text-muted); font-size: 0.85rem;">由安全織網成員手工鈎織，帶有微微感官降壓效果。</p>
+                    <div class="product-meta">
+                        <span class="product-price">HK$ 240</span>
+                        <button class="buy-btn" onclick="alert('金流對接中！')">選購</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 分類二：毛線區 -->
+        <h2 class="category-title">02. 嚴選毛線與材料 / Premium Yarn</h2>
+        <div class="products-grid" id="yarn-container">
+            <div class="product-card" data-id="2">
+                <div class="staff-actions"><button class="delete-btn" onclick="deleteProduct(2)">下架</button></div>
+                <div class="product-image-placeholder">[ 毛線色彩影像 ]</div>
+                <div class="product-info">
+                    <h4 class="product-title">極致親膚 燕麥色純棉五股牛奶線</h4>
+                    <p style="color: var(--text-muted); font-size: 0.85rem;">適合新手編織，觸感柔軟不扎手，極具療癒感。</p>
+                    <div class="product-meta">
+                        <span class="product-price">HK$ 45 / 團</span>
+                        <button class="buy-btn" onclick="alert('金流對接中！')">選購</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const ALLOWED_STAFF_EMAILS = ['crochetforher.hk@gmail.com'];
+        let isStaffAuthenticated = false;
+
+        function handleCredentialResponse(response) {
+            const responsePayload = parseJwt(response.credential);
+            if (ALLOWED_STAFF_EMAILS.includes(responsePayload.email)) {
+                isStaffAuthenticated = true;
+                alert(`安全驗證成功！`);
+                document.getElementById('toggle-container').style.display = 'flex';
+                document.getElementById('mode-checkbox').checked = true;
+                toggleViewMode();
+            } else {
+                alert("此帳號為顧客身分。");
+            }
+        }
+
+        function toggleViewMode() {
+            const isChecked = document.getElementById('mode-checkbox').checked;
+            const staffPanel = document.getElementById('staff-panel');
+            const modeStatus = document.getElementById('mode-status');
+            if (isChecked && isStaffAuthenticated) {
+                document.body.classList.add('staff-mode-active');
+                staffPanel.style.display = 'block';
+                modeStatus.innerText = "🛠️ 職員管理模式";
+            } else {
+                document.body.classList.remove('staff-mode-active');
+                staffPanel.style.display = 'none';
+                modeStatus.innerText = "顧客視角";
+            }
+        }
+
+        function addNewProduct(event) {
+            event.preventDefault();
+            const type = document.getElementById('prod-type').value;
+            const title = document.getElementById('prod-title').value;
+            const price = document.getElementById('prod-price').value;
+            const desc = document.getElementById('prod-desc').value;
+            const id = Date.now();
+
+            const targetContainer = type === 'craft' ? 
+                document.getElementById('crafts-container') : 
+                document.getElementById('yarn-container');
+            
+            const cardHtml = `
+                <div class="product-card" data-id="${id}">
+                    <div class="staff-actions"><button class="delete-btn" onclick="deleteProduct(${id})">下架</button></div>
+                    <div class="product-image-placeholder">[ 商品影像 ]</div>
+                    <div class="product-info">
+                        <h4 class="product-title">${title}</h4>
+                        <p style="color: var(--text-muted); font-size: 0.85rem;">${desc}</p>
+                        <div class="product-meta">
+                            <span class="product-price">HK$ ${price}</span>
+                            <button class="buy-btn" onclick="alert('金流對接中！')">選購</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            targetContainer.insertAdjacentHTML('afterbegin', cardHtml);
+            document.getElementById('product-form').reset();
+            alert("商品已成功分類上架！");
+        }
+
+        function deleteProduct(id) {
+            if (confirm("確認要下架此商品嗎？")) {
+                const card = document.querySelector(`.product-card[data-id="${id}"]`);
+                if (card) card.remove();
+            }
+        }
+
+        function parseJwt(token) {
+            var base64Url = token.split('.')[1];
+            var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+            return JSON.parse(decodeURIComponent(window.atob(base64).split('').map(c => '%' + ('0' + c.charCodeAt(0).toString(16)).slice(-2)).join('')));
+        }
+    </script>
+</body>
+</html>
