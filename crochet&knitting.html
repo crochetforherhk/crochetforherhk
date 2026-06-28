@@ -213,47 +213,27 @@
                     <label for="prod-desc">商品描述</label>
                     <textarea id="prod-desc" rows="2" placeholder="詳細規格或手作背後的小故事..."></textarea>
                 </div>
-                <button type="submit" class="submit-btn">+ 確認發佈商品</button>
+                <div class="form-group">
+    <label for="prod-collection">商品系列 (Collection Tag - 選填)</label>
+    <div class="form-group">
+                        <label for="prod-collection">商品系列 (Collection Tag)</label>
+                        <input type="text" id="prod-collection" placeholder="e.g., Sparkling Collection">
+                    </div>
+                </div>
+                <button type="submit" class="submit-btn" style="margin-top: 1rem;">+ 確認發佈商品</button>
             </form>
         </section>
 
-        <!-- 分類一：製成品 -->
-        <h2 class="category-title">01. 倖存者手作製成品 / Finished Crafts</h2>
-        <div class="products-grid" id="crafts-container">
-            <div class="product-card" data-id="1">
-                <div class="staff-actions"><button class="delete-btn" onclick="deleteProduct(1)">下架</button></div>
-                <div class="product-image-placeholder">[ 織品成品影像 ]</div>
-                <div class="product-info">
-                    <h4 class="product-title">溫柔厚實麻花編織包</h4>
-                    <p style="color: var(--text-muted); font-size: 0.85rem;">由安全織網成員手工鈎織，帶有微微感官降壓效果。</p>
-                    <div class="product-meta">
-                        <span class="product-price">HK$ 240</span>
-                        <button class="buy-btn" onclick="alert('金流對接中！')">選購</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+      <h2 class="category-title">01. 嚴選毛線與材料 / Premium Yarn</h2>
+        <div class="products-grid" id="yarn-container"></div>
 
-        <!-- 分類二：毛線區 -->
-        <h2 class="category-title">02. 嚴選毛線與材料 / Premium Yarn</h2>
-        <div class="products-grid" id="yarn-container">
-            <div class="product-card" data-id="2">
-                <div class="staff-actions"><button class="delete-btn" onclick="deleteProduct(2)">下架</button></div>
-                <div class="product-image-placeholder">[ 毛線色彩影像 ]</div>
-                <div class="product-info">
-                    <h4 class="product-title">極致親膚 燕麥色純棉五股牛奶線</h4>
-                    <p style="color: var(--text-muted); font-size: 0.85rem;">適合新手編織，觸感柔軟不扎手，極具療癒感。</p>
-                    <div class="product-meta">
-                        <span class="product-price">HK$ 45 / 團</span>
-                        <button class="buy-btn" onclick="alert('金流對接中！')">選購</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <h2 class="category-title">02. 倖存者手作製成品 / Finished Crafts</h2>
+        <div class="products-grid" id="crafts-container"></div>
+            
     </main>
 
     <script>
-        const ALLOWED_STAFF_EMAILS = ['crochetforher.hk@gmail.com'];
+        const ALLOWED_STAFF_EMAILS = ['crochetforherhk@gmail.com'];
         let isStaffAuthenticated = false;
 
         function handleCredentialResponse(response) {
