@@ -268,31 +268,52 @@
             event.preventDefault();
             const type = document.getElementById('prod-type').value;
             const title = document.getElementById('prod-title').value;
-            const price = document.getElementById('prod-price').value;
+            const price = parseFloat(document.getElementById('prod-price').value).toFixed(2);
             const desc = document.getElementById('prod-desc').value;
+            const collection = document.getElementById('prod-collection').value.trim();
             const id = Date.now();
 
             const targetContainer = type === 'craft' ? 
                 document.getElementById('crafts-container') : 
                 document.getElementById('yarn-container');
             
+            const imageHtml = currentUploadedImageBase64 ? 
+                `<img src="${currentUploadedImageBase64}" class="product-image" alt="Product Image">` : 
+                `<div class="product-image-placeholder">No Image Available</div>`;
+
+            const collectionTagHtml = collection ? `<span style="display: inline-block; background: #e5e3df; color: #767471; font-size: 0.7rem; padding: 0.2rem 0.6rem; border-radius: 20px; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em;">${collection}</span>` : '';
+            const priceSuffix = type === 'yarn' ? ' / ball' : '';
+
+            // 🌟 核心：自動幫妳組合出商品 HTML 卡片代碼
             const cardHtml = `
-                <div class="product-card" data-id="${id}">
-                    <div class="staff-actions"><button class="delete-btn" onclick="deleteProduct(${id})">下架</button></div>
-                    <div class="product-image-placeholder">[ 商品影像 ]</div>
-                    <div class="product-info">
-                        <h4 class="product-title">${title}</h4>
-                        <p style="color: var(--text-muted); font-size: 0.85rem;">${desc}</p>
-                        <div class="product-meta">
-                            <span class="product-price">HK$ ${price}</span>
-                            <button class="buy-btn" onclick="alert('金流對接中！')">選購</button>
-                        </div>
-                    </div>
-                </div>
-            `;
+    <div class="product-card" data-id="${id}" data-collection="${collection.toLowerCase()}">
+        <div class="staff-actions">
+            <button class="delete-btn" style="background: #4b5563; margin-right: 5px;" onclick="editProduct(${id})">修改</button>
+            <button class="delete-btn" onclick="deleteProduct(${id})">下架</button>
+        </div>
+        ${imageHtml}
+        <div class="product-info">
+            ${collectionTagHtml}
+            <h4 class="product-title">${title}</h4>
+            <p style="color: var(--text-muted); font-size: 0.85rem;">${desc}</p>
+            <div class="product-meta">
+                <span class="product-price">$${price}${priceSuffix}</span>
+                <button class="buy-btn" onclick="alert('Order system coming soon!')">Purchase</button>
+            </div>
+        </div>
+    </div>`;
+            
+            // 1. 先在妳目前的網頁畫面上即時顯示預覽效果
             targetContainer.insertAdjacentHTML('afterbegin', cardHtml);
+            
+            // 2. 🌟 彈出複製提示框，讓妳一秒複製生成的 HTML
+            const codeToCopy = cardHtml.trim();
+            prompt("✨ 商品排版成功！請複製下方這段自動生成的 HTML 代碼，然後去 GitHub 貼上：", codeToCopy);
+
+            // 3. 發佈後自動清空後台表格
             document.getElementById('product-form').reset();
-            alert("商品已成功分類上架！");
+            document.getElementById('file-chosen').innerText = "No file chosen";
+            currentUploadedImageBase64 = "";
         }
 
         function deleteProduct(id) {
