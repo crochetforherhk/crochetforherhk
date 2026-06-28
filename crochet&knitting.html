@@ -140,6 +140,20 @@
         }
 
         .product-info { padding: 1.5rem; }
+        .status-badge {
+            display: inline-block;
+            font-size: 0.7rem;
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: 500;
+            margin-right: 0.5rem;
+        }
+        .status-new { background-color: #2d2c2a; color: #ffffff; }
+        .status-presale { background-color: #e2e8f0; color: #475569; }
+        .status-soldout { background-color: #f1f1f0; color: #b5b3b0; }
         .product-title { font-size: 1.1rem; font-weight: 400; margin-bottom: 0.5rem; }
         .status-badge {
             display: inline-block;
@@ -207,11 +221,20 @@
             <h3 style="color: var(--accent-staff); margin-bottom: 1.5rem;">🛠️ 職員後台：新增商品</h3>
             <form id="product-form" onsubmit="addNewProduct(event)">
                 <div class="form-grid">
-                    <div class="form-group">
+                   <div class="form-group">
                         <label for="prod-type">商品分類</label>
                         <select id="prod-type">
                             <option value="craft">Handcrafted Finished Pieces</option>
                             <option value="yarn">Premium Yarn & Materials</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="prod-status">商品狀態 (Status)</label>
+                        <select id="prod-status">
+                            <option value="">-- 常規商品 (無標籤) --</option>
+                            <option value="new">New Product</option>
+                            <option value="presale">Presale</option>
+                            <option value="soldout">Out of Stock</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -259,34 +282,47 @@
         const ALLOWED_STAFF_EMAILS = ['crochetforherhk@gmail.com'];
         let isStaffAuthenticated = false;
 
-        function handleCredentialResponse(response) {
+      function handleCredentialResponse(response) {
             const responsePayload = parseJwt(response.credential);
+            
+            // 🌟 記憶顧客登入狀態
+            localStorage.setItem('googleUserToken', JSON.stringify(responsePayload));
+            displayUserContent(responsePayload);
+
             if (ALLOWED_STAFF_EMAILS.includes(responsePayload.email)) {
                 isStaffAuthenticated = true;
-                alert(`安全驗證成功！`);
-                document.getElementById('toggle-container').style.display = 'flex';
-                document.getElementById('mode-checkbox').checked = true;
-                toggleViewMode();
-            } else {
-                alert("此帳號為顧客身分。");
+                // 🌟 記憶職員登入狀態
+                localStorage.setItem('isStaffLoggedIn', 'true');
+                alert("✨ 驗證成功！已成功解鎖職員管理後台。");
+                
+                const loginBtn = document.getElementById('login-trigger-btn');
+                const toggleContainer = document.getElementById('toggle-container');
+                const modeCheckbox = document.getElementById('mode-checkbox');
+                
+                if (loginBtn) loginBtn.style.display = 'none';
+                if (toggleContainer) toggleContainer.style.display = 'flex';
+                if (modeCheckbox) {
+                    modeCheckbox.checked = true;
+                    toggleViewMode();
+                }
             }
         }
 
-        function toggleViewMode() {
-            const isChecked = document.getElementById('mode-checkbox').checked;
-            const staffPanel = document.getElementById('staff-panel');
-            const modeStatus = document.getElementById('mode-status');
-            if (isChecked && isStaffAuthenticated) {
-                document.body.classList.add('staff-mode-active');
-                staffPanel.style.display = 'block';
-                modeStatus.innerText = "🛠️ 職員管理模式";
-            } else {
-                document.body.classList.remove('staff-mode-active');
-                staffPanel.style.display = 'none';
-                modeStatus.innerText = "顧客視角";
+        // 🌟 渲染顧客頭像與名字
+        function displayUserContent(payload) {
+            const loginBtn = document.getElementById('login-trigger-btn');
+            if (loginBtn) {
+                loginBtn.innerHTML = `
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <img src="${payload.picture}" style="width: 24px; height: 24px; border-radius: 50%;" alt="User profile">
+                        <span style="font-size: 0.85rem; color: var(--text-dark); font-weight: 500;">${payload.given_name}</span>
+                    </div>
+                `;
+                loginBtn.onclick = null; 
             }
         }
 
+        // 🌟 帶有商品狀態標籤的代碼生成器
         function addNewProduct(event) {
             event.preventDefault();
             const type = document.getElementById('prod-type').value;
@@ -294,6 +330,7 @@
             const price = parseFloat(document.getElementById('prod-price').value).toFixed(2);
             const desc = document.getElementById('prod-desc').value;
             const collection = document.getElementById('prod-collection').value.trim();
+            const status = document.getElementById('prod-status').value;
             const id = Date.now();
 
             const targetContainer = type === 'craft' ? 
@@ -304,10 +341,18 @@
                 `<img src="${currentUploadedImageBase64}" class="product-image" alt="Product Image">` : 
                 `<div class="product-image-placeholder">No Image Available</div>`;
 
+            let statusTagHtml = '';
+            if (status === 'new') {
+                statusTagHtml = `<span class="status-badge status-new">New Product</span>`;
+            } else if (status === 'presale') {
+                statusTagHtml = `<span class="status-badge status-presale">Presale</span>`;
+            } else if (status === 'soldout') {
+                statusTagHtml = `<span class="status-badge status-soldout">Out of Stock</span>`;
+            }
+
             const collectionTagHtml = collection ? `<span style="display: inline-block; background: #e5e3df; color: #767471; font-size: 0.7rem; padding: 0.2rem 0.6rem; border-radius: 20px; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em;">${collection}</span>` : '';
             const priceSuffix = type === 'yarn' ? ' / ball' : '';
 
-            // 🌟 核心：自動幫妳組合出商品 HTML 卡片代碼
             const cardHtml = `
     <div class="product-card" data-id="${id}" data-collection="${collection.toLowerCase()}">
         <div class="staff-actions">
@@ -316,7 +361,7 @@
         </div>
         ${imageHtml}
         <div class="product-info">
-            ${collectionTagHtml}
+            <div>${statusTagHtml}${collectionTagHtml}</div>
             <h4 class="product-title">${title}</h4>
             <p style="color: var(--text-muted); font-size: 0.85rem;">${desc}</p>
             <div class="product-meta">
@@ -326,31 +371,42 @@
         </div>
     </div>`;
             
-            // 1. 先在妳目前的網頁畫面上即時顯示預覽效果
             targetContainer.insertAdjacentHTML('afterbegin', cardHtml);
             
-            // 2. 🌟 彈出複製提示框，讓妳一秒複製生成的 HTML
             const codeToCopy = cardHtml.trim();
             prompt("✨ 商品排版成功！請複製下方這段自動生成的 HTML 代碼，然後去 GitHub 貼上：", codeToCopy);
 
-            // 3. 發佈後自動清空後台表格
             document.getElementById('product-form').reset();
             document.getElementById('file-chosen').innerText = "No file chosen";
             currentUploadedImageBase64 = "";
         }
 
-        function deleteProduct(id) {
-            if (confirm("確認要下架此商品嗎？")) {
-                const card = document.querySelector(`.product-card[data-id="${id}"]`);
-                if (card) card.remove();
+        // 🌟 網頁重新整理時，自動幫【職員】與【顧客】恢復登入狀態
+        window.addEventListener('DOMContentLoaded', () => {
+            if (localStorage.getItem('isStaffLoggedIn') === 'true') {
+                isStaffAuthenticated = true;
+                const loginBtn = document.getElementById('login-trigger-btn');
+                const toggleContainer = document.getElementById('toggle-container');
+                const modeCheckbox = document.getElementById('mode-checkbox');
+                
+                if (loginBtn) loginBtn.style.display = 'none';
+                if (toggleContainer) toggleContainer.style.display = 'flex';
+                if (modeCheckbox) {
+                    modeCheckbox.checked = true;
+                    toggleViewMode();
+                }
             }
-        }
 
-        function parseJwt(token) {
-            var base64Url = token.split('.')[1];
-            var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-            return JSON.parse(decodeURIComponent(window.atob(base64).split('').map(c => '%' + ('0' + c.charCodeAt(0).toString(16)).slice(-2)).join('')));
-        }
+            const savedUser = localStorage.getItem('googleUserToken');
+            if (savedUser) {
+                try {
+                    const payload = JSON.parse(savedUser);
+                    displayUserContent(payload); 
+                } catch (e) {
+                    console.error("恢復顧客登入失敗:", e);
+                }
+            }
+        });
     </script>
 </body>
 </html>
