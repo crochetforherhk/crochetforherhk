@@ -133,6 +133,14 @@
             position: relative;
         }
 
+        /* 🌟 補上上傳圖片後的展示樣式，避免大圖撐爆瀏覽器 */
+        .product-image {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            border-bottom: 1px solid var(--border-color);
+        }
+
         .product-image-placeholder {
             width: 100%; height: 280px; background-color: #faf9f6;
             display: flex; align-items: center; justify-content: center;
@@ -140,21 +148,8 @@
         }
 
         .product-info { padding: 1.5rem; }
-        .status-badge {
-            display: inline-block;
-            font-size: 0.7rem;
-            padding: 0.2rem 0.6rem;
-            border-radius: 4px;
-            margin-bottom: 0.5rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            font-weight: 500;
-            margin-right: 0.5rem;
-        }
-        .status-new { background-color: #2d2c2a; color: #ffffff; }
-        .status-presale { background-color: #e2e8f0; color: #475569; }
-        .status-soldout { background-color: #f1f1f0; color: #b5b3b0; }
         .product-title { font-size: 1.1rem; font-weight: 400; margin-bottom: 0.5rem; }
+        
         .status-badge {
             display: inline-block;
             font-size: 0.7rem;
@@ -169,6 +164,7 @@
         .status-new { background-color: #2d2c2a; color: #ffffff; }
         .status-presale { background-color: #e2e8f0; color: #475569; }
         .status-soldout { background-color: #f1f1f0; color: #b5b3b0; }
+        
         .product-meta { display: flex; justify-content: space-between; align-items: center; margin-top: 1rem; }
         .product-price { font-weight: 500; font-size: 1.05rem; }
         
@@ -183,6 +179,17 @@
 
         body.staff-mode-active { border-top: 4px solid var(--accent-staff); }
         body.staff-mode-active .staff-actions { display: flex; }
+
+        /* 🌟 自訂登入成功後的使用者資訊樣式 */
+        .user-profile-box {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 0.4rem 1rem;
+            border-radius: 30px;
+            border: 1px solid var(--border-color);
+        }
     </style>
 </head>
 <body>
@@ -200,13 +207,16 @@
                     <span class="slider"></span>
                 </label>
             </div>
-            <div id="g_id_onload"
-                 data-client_id="YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com"
-                 data-context="signin"
-                 data-ux_mode="popup"
-                 data-callback="handleCredentialResponse">
+            
+            <div id="login-container" style="display: flex; align-items: center;">
+                <div id="g_id_onload"
+                     data-client_id="YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com"
+                     data-context="signin"
+                     data-ux_mode="popup"
+                     data-callback="handleCredentialResponse">
+                </div>
+                <div class="g_id_signin" data-type="standard" data-shape="pill" data-theme="outline" data-size="medium"></div>
             </div>
-            <div class="g_id_signin" data-type="standard" data-shape="pill" data-theme="outline" data-size="medium"></div>
         </div>
     </nav>
 
@@ -216,7 +226,6 @@
             <p>在這裡，妳可以挑選倖存者親手鈎織的溫柔成品，或是帶走一扎療癒感官的嚴選毛線。</p>
         </div>
 
-        <!-- 職員上架後台 -->
         <section id="staff-panel">
             <h3 style="color: var(--accent-staff); margin-bottom: 1.5rem;">🛠️ 職員後台：新增商品</h3>
             <form id="product-form" onsubmit="addNewProduct(event)">
@@ -256,7 +265,6 @@
                         <label for="prod-collection">商品系列 (Collection Tag - 選填)</label>
                         <input type="text" id="prod-collection" placeholder="e.g., Sparkling Collection">
                     </div>
-                    <!-- 🌟 補上上傳圖片的欄位，這樣底下的 JavaScript 就不會找不到 file-chosen 而崩潰 -->
                     <div class="form-group">
                         <label>商品圖片 (選填)</label>
                         <input type="file" id="prod-image-input" accept="image/*" onchange="handleImageUpload(event)">
@@ -267,7 +275,7 @@
             </form>
         </section>
 
-      <h2 class="category-title">01. 嚴選毛線與材料 / Premium Yarn</h2>
+        <h2 class="category-title">01. 嚴選毛線與材料 / Premium Yarn</h2>
         <div class="products-grid" id="yarn-container"></div>
 
         <h2 class="category-title">02. 倖存者手作製成品 / Finished Crafts</h2>
@@ -278,8 +286,9 @@
     <script>
         const ALLOWED_STAFF_EMAILS = ['crochetforherhk@gmail.com'];
         let isStaffAuthenticated = false;
-let currentUploadedImageBase64 = "";
-        // 🌟 補上：處理圖片轉成 Base64 的函數
+        let currentUploadedImageBase64 = "";
+
+        // 處理圖片上傳與轉碼
         function handleImageUpload(event) {
             const file = event.target.files[0];
             const fileChosen = document.getElementById('file-chosen');
@@ -296,16 +305,17 @@ let currentUploadedImageBase64 = "";
             }
         }
 
-        // 🌟 補上：防止點擊修改或下架時網頁報錯的空函數（之後可以擴充功能）
         function editProduct(id) {
             alert("修改功能開發中！此商品的 ID 為: " + id);
         }
+        
         function deleteProduct(id) {
             if(confirm("確定要下架此商品嗎？")) {
                 const card = document.querySelector(`[data-id="${id}"]`);
                 if (card) card.remove();
             }
         }
+
         function parseJwt(token) {
             var base64Url = token.split('.')[1];
             var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
@@ -314,6 +324,7 @@ let currentUploadedImageBase64 = "";
             }).join(''));
             return JSON.parse(jsonPayload);
         }
+
         function toggleViewMode() {
             const isStaffMode = document.getElementById('mode-checkbox').checked;
             const staffPanel = document.getElementById('staff-panel');
@@ -331,24 +342,21 @@ let currentUploadedImageBase64 = "";
             }
         }
         
-      function handleCredentialResponse(response) {
+        function handleCredentialResponse(response) {
             const responsePayload = parseJwt(response.credential);
             
-            // 🌟 記憶顧客登入狀態
+            // 記憶登入憑證與狀態
             localStorage.setItem('googleUserToken', JSON.stringify(responsePayload));
             displayUserContent(responsePayload);
 
             if (ALLOWED_STAFF_EMAILS.includes(responsePayload.email)) {
                 isStaffAuthenticated = true;
-                // 🌟 記憶職員登入狀態
                 localStorage.setItem('isStaffLoggedIn', 'true');
                 alert("✨ 驗證成功！已成功解鎖職員管理後台。");
                 
-                const loginBtn = document.getElementById('login-trigger-btn');
                 const toggleContainer = document.getElementById('toggle-container');
                 const modeCheckbox = document.getElementById('mode-checkbox');
                 
-                if (loginBtn) loginBtn.style.display = 'none';
                 if (toggleContainer) toggleContainer.style.display = 'flex';
                 if (modeCheckbox) {
                     modeCheckbox.checked = true;
@@ -357,21 +365,20 @@ let currentUploadedImageBase64 = "";
             }
         }
 
-        // 🌟 渲染顧客頭像與名字
+        // 正確渲染頭像，並把原本的 Google 登入按鈕乾淨地隱藏
         function displayUserContent(payload) {
-            const loginBtn = document.getElementById('login-trigger-btn');
-            if (loginBtn) {
-                loginBtn.innerHTML = `
-                    <div style="display: flex; align-items: center; gap: 8px;">
+            const loginContainer = document.getElementById('login-container');
+            if (loginContainer) {
+                loginContainer.innerHTML = `
+                    <div class="user-profile-box">
                         <img src="${payload.picture}" style="width: 24px; height: 24px; border-radius: 50%;" alt="User profile">
-                        <span style="font-size: 0.85rem; color: var(--text-dark); font-weight: 500;">${payload.given_name}</span>
+                        <span style="font-size: 0.85rem; color: var(--text-main); font-weight: 500;">${payload.given_name}</span>
                     </div>
                 `;
-                loginBtn.onclick = null; 
             }
         }
 
-        // 🌟 帶有商品狀態標籤的代碼生成器
+        // 新增商品與代碼生成
         function addNewProduct(event) {
             event.preventDefault();
             const type = document.getElementById('prod-type').value;
@@ -422,30 +429,27 @@ let currentUploadedImageBase64 = "";
             
             targetContainer.insertAdjacentHTML('afterbegin', cardHtml);
             
+            // 🌟 核心防卡死微調：如果含有圖片，提示使用者代碼已生成在網頁上，引導複製
             const codeToCopy = cardHtml.trim();
-            prompt("✨ 商品排版成功！請複製下方這段自動生成的 HTML 代碼，然後去 GitHub 貼上：", codeToCopy);
+            try {
+                // 如果字串太大，有些瀏覽器會阻擋 prompt，這裡做個防護
+                setTimeout(() => {
+                    prompt("✨ 商品排版成功！請複製下方這段自動生成的 HTML 代碼，然後去 GitHub 貼上：", codeToCopy);
+                }, 100);
+            } catch (err) {
+                console.log("自動彈窗失敗，請直接從瀏覽器控制台或頁面元素複製代碼。");
+            }
 
+            // 重設表單
             document.getElementById('product-form').reset();
-            document.getElementById('file-chosen').innerText = "No file chosen";
+            const fileChosen = document.getElementById('file-chosen');
+            if (fileChosen) fileChosen.innerText = "No file chosen";
             currentUploadedImageBase64 = "";
         }
 
-        // 🌟 網頁重新整理時，自動幫【職員】與【顧客】恢復登入狀態
+        // 🌟 網頁重新整理時，核心修復：絕對不會再因為找不到物件而卡死
         window.addEventListener('DOMContentLoaded', () => {
-            if (localStorage.getItem('isStaffLoggedIn') === 'true') {
-                isStaffAuthenticated = true;
-                const loginBtn = document.getElementById('login-trigger-btn');
-                const toggleContainer = document.getElementById('toggle-container');
-                const modeCheckbox = document.getElementById('mode-checkbox');
-                
-                if (loginBtn) loginBtn.style.display = 'none';
-                if (toggleContainer) toggleContainer.style.display = 'flex';
-                if (modeCheckbox) {
-                    modeCheckbox.checked = true;
-                    toggleViewMode();
-                }
-            }
-
+            // 1. 先復原使用者基本資訊與頭像
             const savedUser = localStorage.getItem('googleUserToken');
             if (savedUser) {
                 try {
@@ -453,6 +457,19 @@ let currentUploadedImageBase64 = "";
                     displayUserContent(payload); 
                 } catch (e) {
                     console.error("恢復顧客登入失敗:", e);
+                }
+            }
+
+            // 2. 復原職員後台權限
+            if (localStorage.getItem('isStaffLoggedIn') === 'true') {
+                isStaffAuthenticated = true;
+                const toggleContainer = document.getElementById('toggle-container');
+                const modeCheckbox = document.getElementById('mode-checkbox');
+                
+                if (toggleContainer) toggleContainer.style.display = 'flex';
+                if (modeCheckbox) {
+                    modeCheckbox.checked = true;
+                    toggleViewMode();
                 }
             }
         });
