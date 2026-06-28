@@ -141,6 +141,20 @@
 
         .product-info { padding: 1.5rem; }
         .product-title { font-size: 1.1rem; font-weight: 400; margin-bottom: 0.5rem; }
+        .status-badge {
+            display: inline-block;
+            font-size: 0.7rem;
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: 500;
+            margin-right: 0.5rem;
+        }
+        .status-new { background-color: #2d2c2a; color: #ffffff; }
+        .status-presale { background-color: #e2e8f0; color: #475569; }
+        .status-soldout { background-color: #f1f1f0; color: #b5b3b0; }
         .product-meta { display: flex; justify-content: space-between; align-items: center; margin-top: 1rem; }
         .product-price { font-weight: 500; font-size: 1.05rem; }
         
@@ -196,8 +210,17 @@
                     <div class="form-group">
                         <label for="prod-type">商品分類</label>
                         <select id="prod-type">
-                            <option value="craft">倖存者手作製成品 (Crafts)</option>
-                            <option value="yarn">療癒毛線材料 (Yarn)</option>
+                            <option value="craft">Handcrafted Finished Pieces</option>
+                            <option value="yarn">Premium Yarn & Materials</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="prod-status">商品狀態 (Status)</label>
+                        <select id="prod-status">
+                            <option value="">-- 常規商品 (無標籤) --</option>
+                            <option value="new">New Product</option>
+                            <option value="presale">Presale</option>
+                            <option value="soldout">Out of Stock</option>
                         </select>
                     </div>
                     <div class="form-group">
